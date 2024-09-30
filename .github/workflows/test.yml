@@ -1,20 +1,16 @@
-# Name of Workflow
 name: Test Project
-# Define when the Workflow will be executed
 on: push
-# Define the work that should be done
 jobs:
-    # Name of first job
     test:
-        # Defines the runner the job will execute on
         runs-on: ubuntu-latest
-        # Define the steps
         steps:
-            # Name predefined action
             - name: Get code
               uses: actions/checkout@v3
-            # Name predefined action and configure with parameters used with the ACTION
             - name: Install NodeJS
               uses: actions/setup-node@v3
-                with:
-                    node-version: 18
+              with:
+                node-version: 18
+            - name: Install dependencies
+              run: npm ci
+            -name: Run tests
+              run: npm test
